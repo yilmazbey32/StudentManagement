@@ -14,11 +14,11 @@ import java.util.List;
 
 @Repository
 public interface ContactMessageRepository extends JpaRepository<ContactMessage,Long> {
-    Page<ContactMessage> findByEmailEquels(String email, Pageable pageable);
+    Page<ContactMessage> findByEmailEquals(String email, Pageable pageable);
 
-    Page<ContactMessage> findBySubjectEquels(String subject, Pageable pageable);
+    Page<ContactMessage> findBySubjectEquals(String subject, Pageable pageable);
 
-    @Query("SELECT c FROM ContactMessage c WHERE FUNCTİON('DATE,c) dateTime BETWEEN ?1 AND ?2")
+    @Query("SELECT c FROM ContactMessage c WHERE FUNCTION('DATE', c.dateTime) BETWEEN ?1 and ?2")
     List<ContactMessage> findMessagesBetweenDates(LocalDate beginDate, LocalDate endDate);
 
     @Query("SELECT c FROM ContactMessage c WHERE " +

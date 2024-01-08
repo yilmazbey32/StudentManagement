@@ -55,7 +55,7 @@ public class ContactMessageService {
         Pageable pageable = PageRequest.of(page, size, Sort.by(sort).ascending());
         if(Objects.equals(type, "desc")) {
             pageable = PageRequest.of(page, size, Sort.by(sort).descending());
-        }return contactMessageRepository.findByEmailEquels(email,pageable).map(contactMessageMapper::contactMessageToResponse);
+        }return contactMessageRepository.findByEmailEquals(email,pageable).map(contactMessageMapper::contactMessageToResponse);
     }
 
     public Page<ContactMessageResponse> searchBySubject(String subject, int page, int size, String sort, String type) {
@@ -63,7 +63,7 @@ public class ContactMessageService {
         if(Objects.equals(type, "desc")) {
             pageable = PageRequest.of(page, size, Sort.by(sort).descending());
     }
-        return contactMessageRepository.findBySubjectEquels(subject,pageable).map(contactMessageMapper::contactMessageToResponse);
+        return contactMessageRepository.findBySubjectEquals(subject,pageable).map(contactMessageMapper::contactMessageToResponse);
 }
 
     public String deleteById(Long contactMessageId) {

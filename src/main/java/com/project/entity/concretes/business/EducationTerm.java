@@ -3,6 +3,7 @@ package com.project.entity.concretes.business;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.project.entity.enums.Term;
+import jdk.jshell.Snippet;
 import lombok.*;
 
 import javax.persistence.*;
@@ -15,7 +16,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@Builder(toBuilder = true)
 public class EducationTerm {
 
     @Id
@@ -44,6 +45,7 @@ public class EducationTerm {
     @OneToMany(mappedBy = "educationTerm", cascade=CascadeType.ALL)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<LessonProgram> lessonProgram;
+
 
 }
 

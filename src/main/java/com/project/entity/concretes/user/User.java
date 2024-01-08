@@ -38,9 +38,9 @@ public class User {
     private String surname;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING,pattern ="yyyy-mm-dd")
-    private LocalDate birthday;
+    private LocalDate birthDay;
 
-    private String birthDay;
+    private String birthPlace;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)// Json --->Java nesnesine
     private String password; // client tarafına gitmeyecek
@@ -53,13 +53,15 @@ public class User {
 
     private Boolean built_in;// değiştirilemez
 
-    private String mothername;
+    private String motherName;
 
-    private String fathername;
+    private String fatherName;
 
     private boolean isActive;
 
     private Boolean isAdvisor;
+
+    private String studentNumber;
 
     private Long advisorTeacherId;// öğrenciler için gerekli
 

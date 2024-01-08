@@ -51,7 +51,7 @@ public class AuthenticationService {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         //!!! JWT token olusturuluyor
-        String token = "Bearer " + jwtUtils.generateJwtToken(authentication);
+        String  token = "Bearer " + jwtUtils.generateJwtToken(authentication);
 
         // !!! Response nesnesi olusturuluyor
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
@@ -59,7 +59,7 @@ public class AuthenticationService {
         // UserDetailste role grantedauth tibinde
         //!!! grantedAuth --> Role ( String )
         Set<String> roles = userDetails.getAuthorities()
-                .stream() // Sream<GrantedAuth>
+                .stream() // Stream<GrantedAuth>
                 .map(GrantedAuthority::getAuthority) // Stream<String>
                 .collect(Collectors.toSet());
 
@@ -79,14 +79,14 @@ public class AuthenticationService {
 
 
     public UserResponse findByUsername(String username) {
-        User user = userRepository.findByUserName(username);
+        User user = userRepository.findByUsername(username);
         //!!! Pojo --> DTO
         return userMapper.mapUserToUserResponse(user);
     }
     public void updatePassword(UpdatePasswordRequest updatePasswordRequest, HttpServletRequest request) {
 
         String userName = (String) request.getAttribute("username");
-        User user = userRepository.findByUserName(userName);
+        User user = userRepository.findByUsername(userName);
 
         // !!! Built_IN kontrolu
         if(Boolean.TRUE.equals(user.getBuilt_in())){

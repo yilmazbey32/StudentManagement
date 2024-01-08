@@ -23,16 +23,15 @@ public class AuthenticationController {
     private final UserService userService;
     private final AuthenticationService authenticationService;
 
-
-    // login işleminde postmapping kullanılır
     @PostMapping("/login") // http://localhost:8080/auth/login  + POST + JSON
-    @PreAuthorize("hasAnyAuthority('ADMIN,'MANAGER','ASSİSTANT_MANAGER','TEACHER','STUDENT')")
     public ResponseEntity<AuthResponse> authenticateUser(@RequestBody @Valid LoginRequest loginRequest){
 
         return authenticationService.authenticateUser(loginRequest);
     }
+
+
     @GetMapping("/user") // http://localhost:8080/auth/user + GET
-    @PreAuthorize("hasAnyAuthority('ADMIN,'MANAGER','ASSİSTANT_MANAGER','TEACHER','STUDENT')")
+    @PreAuthorize("hasAnyAuthority('ADMIN')") // Admin
     public ResponseEntity<UserResponse> findByUsername(HttpServletRequest request){
         String username = (String) request.getAttribute("username");
         UserResponse userResponse =  authenticationService.findByUsername(username);
@@ -40,6 +39,7 @@ public class AuthenticationController {
     }
 
     @PatchMapping("/updatePassword")  // http://localhost:8080/auth/updatePassword + PATCH + JSON
+    @PreAuthorize("hasAnyAuthority('ADMIN','MANAGER','ASSISTANT_MANAGER','TEACHER','STUDENT')")
     public ResponseEntity<String> updatePassword(@RequestBody @Valid UpdatePasswordRequest updatePasswordRequest,
                                                  HttpServletRequest request){
         authenticationService.updatePassword(updatePasswordRequest, request);

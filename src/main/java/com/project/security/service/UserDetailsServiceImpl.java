@@ -15,10 +15,10 @@ private UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-      User user= userRepository.findByUserName(username);
+      User user= userRepository.findByUsername(username);
         if(user != null){
             return new UserDetailsImpl(user.getId(), user.getUsername(),
-                    user.getName(),false, user.getPassword(),user.getUserRole().getRoleType().name,user.getSsn());
+                    user.getName(),false, user.getPassword(),user.getUserRole().getRoleType().name(),user.getSsn());
       }
       throw new UsernameNotFoundException("User"+username+"not found");
     }

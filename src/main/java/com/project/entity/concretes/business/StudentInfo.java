@@ -42,7 +42,7 @@ public class StudentInfo {
     @JsonIgnore
     private User Student;
 
-    /// TO DO LESSON VE EDUCATİONTERM EKLENECEK
+
 
 
     @ManyToOne
